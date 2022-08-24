@@ -1,0 +1,21 @@
+.ft12 {
+  font-size: 12px; }
+
+.h-bg {
+  padding: 0 20px;
+  background-color: #fff;
+  box-shadow: 1px 1px 10px #ddd; }
+
+.box-fixed {
+  width: 1200px;
+  margin: 16px auto; }
+
+.box-fill {
+  width: 100%;
+  background-color: #f5f5f5; }
+
+.box-ft {
+  background-color: #041b31;
+  width: 100%; }
+
+/*# sourceMappingURL=base.css.map */
