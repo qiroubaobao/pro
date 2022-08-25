@@ -4,7 +4,7 @@
    <table class="table">
      <tr>
        <td style="width: 10%;"><span class="redstar">*</span>标准物质名称：</td>
-       <td colspan="3"><a-input v-model:value="inStorageData.name" placeholder="标准物质名称"></a-input></td>
+       <td colspan="3"><a-input v-model:value="inStorageData.name" placeholder="标准物质名称" :rules="[{ required: true, message: 'Please input your username!' }]"></a-input></td>
      </tr>
      <tr>
        <td><span class="redstar">*</span>CAS：</td>
@@ -208,7 +208,7 @@ import { defineComponent, reactive, ref } from 'vue'
 import {SearchOutlined, FormOutlined, PlusOutlined } from "@ant-design/icons-vue"
 import { message } from 'antd';
 import { useRouter } from "vue-router"
-import {getGGDW,getBZDW,getSupplier,getLocation,saveSubmitMaterials} from "@/service/api/main" 
+import {getGGDW,getBZDW,getSupplier,getLocation,saveSubmitMaterials} from "@/service/api/main"
 import dayjs from 'dayjs';
 
 function getBase64(file) {
@@ -228,10 +228,10 @@ export default defineComponent({
     FormOutlined,
     PlusOutlined
   },
-  setup() {    
+  setup() {
     const router = useRouter()
     const dateFormat = 'YYYY-MM-DD';
-    let loadState=ref(false)    
+    let loadState=ref(false)
     let supplierList=reactive({data: [{id:1,name:''}]})
     let locationList=reactive({data: [{id:1,name:''}]})
     let ggdwList=reactive({data: [{id:1,name:''}]})
@@ -251,7 +251,7 @@ export default defineComponent({
       remainingAmount: 100,
       openDate:ref(dayjs(getDate(), dateFormat))}]
     })
-    
+
     const formItemLayout = {
       labelCol: {
         span: 8,
@@ -312,7 +312,7 @@ export default defineComponent({
     }
     const saveSubmit = () => {
       //console.info(lors.value)
-      
+
       if(!inStorageData.name)
       {
         message.error("请输入标准物质名称")
@@ -345,11 +345,11 @@ export default defineComponent({
       var dayDate = date.year + '-' + (date.month >= 10 ? date.month : '0' + date.month) + '-' + (date.day >= 10 ? date.day : '0' + date.day)
       return dayDate;
     }
-    
+
     function getGGDWList()
     {
       getGGDW().then(resp => {
-        if (resp.code === 0) {          
+        if (resp.code === 0) {
           ggdwList.data=resp.data
           if(resp.data.length>0&&inStorageData.ggdw=='')
           {
@@ -358,7 +358,7 @@ export default defineComponent({
         }
       })
     }
-    
+
     function getBZDWList()
     {
       getBZDW().then(resp => {
@@ -375,7 +375,7 @@ export default defineComponent({
     function getSupplierList()
     {
       getSupplier().then(resp => {
-        if (resp.code === 0) {          
+        if (resp.code === 0) {
           supplierList.data=resp.data
           if(resp.data.length>0&&inStorageData.supplierID=='')
           {
@@ -388,7 +388,7 @@ export default defineComponent({
     function getLocationList()
     {
       getLocation().then(resp => {
-        if (resp.code === 0) {          
+        if (resp.code === 0) {
           locationList.data=resp.data
           if(resp.data.length>0&&inStorageData.location=='')
           {
@@ -401,7 +401,7 @@ export default defineComponent({
       const page = router.resolve({
         name: "Location",
         params: {}
-      });      
+      });
       window.open(page.href, '_blank');
       isReloadLocation.value=true
     }
